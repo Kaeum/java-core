@@ -2,10 +2,6 @@
 
 ## 학습 목표
 
-두나무 JD 요구사항:
-> "JVM, OS, Network 레벨에서의 심도 있는 이해를 바탕으로 성능 병목을 분석하고 튜닝"
-> "동시성 이슈 해결 및 데이터 정합성 보장"
-
 **단순 사용이 아닌 원리 이해**가 핵심입니다.
 
 ---
@@ -25,9 +21,9 @@
 
 | 주제 | 핵심 내용 | 상태 |
 |------|----------|------|
-| Executor Framework | ExecutorService, ThreadPool | 🔄 진행중 |
-| Future & Callable | 비동기 결과 처리 | ⬜ |
-| CompletableFuture | 비동기 파이프라인 | ⬜ |
+| Executor Framework | ExecutorService, ThreadPool | ✅ |
+| Future & Callable | 비동기 결과 처리, CompletionService, invokeAll/Any | ✅ |
+| CompletableFuture | 비동기 파이프라인, 예외 처리, 작업 조합 | ✅ |
 | Lock API | ReentrantLock, ReadWriteLock | ⬜ |
 
 ### Phase 3: 동시성 컬렉션 & Atomic
