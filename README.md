@@ -24,7 +24,7 @@
 | Executor Framework | ExecutorService, ThreadPool | ✅ |
 | Future & Callable | 비동기 결과 처리, CompletionService, invokeAll/Any | ✅ |
 | CompletableFuture | 비동기 파이프라인, 예외 처리, 작업 조합 | ✅ |
-| Lock API | ReentrantLock, ReadWriteLock | ⬜ |
+| Lock API | ReentrantLock, ReadWriteLock, tryLock, lockInterruptibly | ✅ |
 
 ### Phase 3: 동시성 컬렉션 & Atomic
 
