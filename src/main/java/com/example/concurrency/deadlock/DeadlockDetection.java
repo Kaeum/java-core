@@ -1,4 +1,4 @@
-package com.example.concurrency.problem;
+package com.example.concurrency.deadlock;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;

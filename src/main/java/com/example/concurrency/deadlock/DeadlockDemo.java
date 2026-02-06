@@ -1,4 +1,4 @@
-package com.example.concurrency.problem;
+package com.example.concurrency.deadlock;
 
 import java.util.concurrent.TimeUnit;
 
