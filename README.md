@@ -30,10 +30,10 @@
 
 | 주제 | 핵심 내용 | 상태 |
 |------|----------|------|
-| ConcurrentHashMap | 세그먼트 락, CAS 기반 | ⬜ |
-| BlockingQueue | Producer-Consumer 패턴 | ⬜ |
-| Atomic 클래스 | CAS(Compare-And-Swap) 원리 | ⬜ |
-| LongAdder/Accumulator | 고성능 카운터 | ⬜ |
+| Atomic 클래스 | CAS(Compare-And-Swap) 원리, AtomicInteger/Long/Reference | ✅ |
+| LongAdder/Accumulator | 고성능 카운터, Cell 분산 방식 | ✅ |
+| ConcurrentHashMap | CAS + Node 단위 synchronized, compute 패턴 | ✅ |
+| BlockingQueue | Producer-Consumer 패턴, put/take vs offer/poll | ✅ |
 
 ### Phase 4: 심화 & 트러블슈팅
 
@@ -72,3 +72,6 @@ java-core/
 5. **CAS(Compare-And-Swap)란?**
 6. **ThreadLocal은 언제 사용하는가?**
 7. **happens-before 관계란?**
+8. **LongAdder가 AtomicLong보다 빠른 이유는?**
+9. **ABA 문제란? 어떻게 해결하는가?**
+10. **BlockingQueue의 put/take vs offer/poll 차이는?**
