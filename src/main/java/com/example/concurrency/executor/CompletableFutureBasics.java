@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * - 여러 작업 조합 (thenCompose, thenCombine, allOf, anyOf)
  * - 선언적 예외 처리 (exceptionally, handle)
  *
- * 면접 질문: "Future vs CompletableFuture 차이?"
+ * 생각해볼 점: "Future vs CompletableFuture 차이?"
  * - Future: 블로킹 get(), 콜백 불가, 수동 예외 처리
  * - CompletableFuture: 논블로킹 체이닝, 콜백 지원, 선언적 예외 처리, 작업 조합
  */
@@ -129,7 +129,7 @@ public class CompletableFutureBasics {
      * - "새 스레드 생성"이 아니라 "풀에서 가용 스레드 할당"
      * - 같은 worker 스레드가 재사용될 수 있음 (work-stealing)
      *
-     * 면접 질문: "thenApply와 thenApplyAsync 차이?"
+     * 생각해볼 점: "thenApply와 thenApplyAsync 차이?"
      * - thenApply: 동기적 실행 가능 (스레드 전환 없이 바로 실행될 수 있음)
      * - thenApplyAsync: 항상 비동기 (Executor에 제출, 스레드 풀에서 실행)
      * - 대부분 thenApply로 충분, 블로킹 I/O를 별도 풀에서 실행할 때 Async + 커스텀 Executor

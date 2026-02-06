@@ -24,7 +24,7 @@ import java.util.concurrent.TimeoutException;
  * - cancel(): 작업 취소 시도
  * - isDone(), isCancelled(): 상태 확인
  *
- * 면접 질문: "Future.get()의 문제점은?"
+ * 생각해볼 점: "Future.get()의 문제점은?"
  * - 블로킹이라 여러 Future를 효율적으로 처리하기 어려움
  * - 콜백 불가능 (완료 시 자동 실행되는 로직 못 붙임)
  * - 대안: CompletableFuture

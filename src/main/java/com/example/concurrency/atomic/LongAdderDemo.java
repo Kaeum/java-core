@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.LongAdder;
  * - AtomicLong: 현재 정확한 값이 필요할 때
  * - LongAdder: 쓰기가 잦고, 읽기(sum)가 드문 경우 (통계, 카운터)
  *
- * 면접 질문: "LongAdder가 AtomicLong보다 빠른 이유는?"
+ * 생각해볼 점: "LongAdder가 AtomicLong보다 빠른 이유는?"
  * - CAS 경합을 여러 Cell로 분산
  * - 스레드별로 다른 Cell에 쓰기
  * - sum() 호출 시만 합산 (약간의 정확도 희생)

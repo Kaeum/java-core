@@ -11,7 +11,7 @@ package com.example.concurrency.basic;
  *    - MODIFY: 값 증가
  *    - WRITE: 메모리에 값 쓰기
  *
- * 면접 질문: "count++이 Thread-safe하지 않은 이유는?"
+ * 생각해볼 점: "count++이 Thread-safe하지 않은 이유는?"
  */
 public class RaceConditionDemo {
 

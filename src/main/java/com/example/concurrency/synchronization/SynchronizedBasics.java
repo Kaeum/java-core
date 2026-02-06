@@ -8,7 +8,7 @@ package com.example.concurrency.synchronization;
  * 2. synchronized는 Monitor Lock을 사용하여 임계 영역(Critical Section)을 보호
  * 3. 한 번에 하나의 스레드만 Lock을 획득하여 임계 영역 진입 가능
  *
- * 면접 질문: "synchronized의 동작 원리는?"
+ * 생각해볼 점: "synchronized의 동작 원리는?"
  * -> 객체의 Monitor Lock을 획득한 스레드만 임계 영역에 진입 가능
  * -> Lock을 획득하지 못한 스레드는 BLOCKED 상태로 대기
  */

@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  * - 나머지 작업은 자동 취소
  * - 모두 실패하면 ExecutionException
  *
- * 면접 질문: "invokeAll vs invokeAny 차이점?"
+ * 생각해볼 점: "invokeAll vs invokeAny 차이점?"
  * - invokeAll: 전체 결과 필요 (ex: 여러 DB에서 데이터 수집)
  * - invokeAny: 하나만 있으면 됨 (ex: 여러 서버에 같은 요청, 가장 빠른 응답 사용)
  */

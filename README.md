@@ -39,7 +39,7 @@
 
 | 주제 | 핵심 내용 | 상태 |
 |------|----------|------|
-| Deadlock | 발생 조건, 탐지, 회피 | ⬜ |
+| Deadlock | 발생 조건, 탐지, 회피 | ✅ |
 | 성능 분석 | JVM 스레드 덤프 분석 | ⬜ |
 | 실전 패턴 | Double-Checked Locking, ThreadLocal | ⬜ |
 
@@ -63,7 +63,7 @@ java-core/
 
 ---
 
-## 면접 대비 핵심 질문
+## 핵심 질문
 
 1. **synchronized vs ReentrantLock 차이점은?**
 2. **volatile은 어떤 문제를 해결하는가?**

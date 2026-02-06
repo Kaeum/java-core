@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * - ThreadPool: 스레드를 미리 만들어두고 재사용, 작업은 큐에 넣어서 순서대로 처리
  * - ThreadPool의 가치는 '속도'가 아니라 '리소스 제어'와 '안정성'
  *
- * 면접 질문: "newFixedThreadPool과 newCachedThreadPool의 차이는?"
+ * 생각해볼 점: "newFixedThreadPool과 newCachedThreadPool의 차이는?"
  * - Fixed: 고정 크기, 초과 작업은 큐에서 대기. 안정적이지만 큐가 무한히 쌓일 수 있음
  * - Cached: 필요할 때 생성, 60초 유휴 시 제거. 유연하지만 스레드가 무한 증가 가능
  *

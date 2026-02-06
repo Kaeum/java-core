@@ -8,7 +8,7 @@ package com.example.concurrency.synchronization;
  * 2. 이 덕분에 volatile 변수 하나로 여러 일반 변수의 가시성까지 보장 가능
  * 3. 실전 활용: Double-Checked Locking 싱글톤 패턴
  *
- * 면접 질문: "DCL(Double-Checked Locking)에서 왜 volatile이 필요한가?"
+ * 생각해볼 점: "DCL(Double-Checked Locking)에서 왜 volatile이 필요한가?"
  * -> 객체 생성은 (1)메모리 할당 (2)생성자 실행 (3)참조 할당 인데,
  *    reordering으로 (1)->(3)->(2) 순서가 되면 불완전한 객체가 보일 수 있음
  */

@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * - AtomicReference<V>: 참조 원자적 연산
  * - AtomicStampedReference<V>: ABA 문제 해결 (스탬프 포함)
  *
- * 면접 질문: "CAS(Compare-And-Swap)란?"
+ * 생각해볼 점: "CAS(Compare-And-Swap)란?"
  * - 락 없이 원자적 연산을 수행하는 기법
  * - 현재값이 기대값과 같을 때만 새 값으로 교체
  * - 실패 시 재시도 (낙관적 동시성 제어)

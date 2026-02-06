@@ -26,7 +26,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * | read     | 허용     | 대기       |
  * | write    | 대기     | 대기       |
  *
- * 면접 질문: "읽기 비율이 높은 캐시에 어떤 락을 쓰겠는가?"
+ * 생각해볼 점: "읽기 비율이 높은 캐시에 어떤 락을 쓰겠는가?"
  * - ReentrantReadWriteLock 사용
  * - 읽기 작업이 90%+ 이면 효과적
  * - 쓰기 비율 높으면 오히려 오버헤드 (락 관리 비용)

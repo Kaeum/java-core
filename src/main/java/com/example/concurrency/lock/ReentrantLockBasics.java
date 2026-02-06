@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * | 공정성 | 불공정 (비보장) | 선택 가능 (fair=true) |
  * | Condition | wait/notify | await/signal (다중 조건 가능) |
  *
- * 면접 질문: "synchronized 대신 ReentrantLock을 쓰는 경우는?"
+ * 생각해볼 점: "synchronized 대신 ReentrantLock을 쓰는 경우는?"
  * - 타임아웃이 필요할 때 (tryLock)
  * - 락 획득 중 인터럽트가 필요할 때 (lockInterruptibly)
  * - 공정한 락이 필요할 때 (fair=true)

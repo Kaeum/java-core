@@ -37,7 +37,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *                     └── synchronized (충돌 시)
  * ```
  *
- * 면접 질문: "ConcurrentHashMap은 어떻게 동시성을 보장하는가?"
+ * 생각해볼 점: "ConcurrentHashMap은 어떻게 동시성을 보장하는가?"
  * - Java 8+: CAS + 세분화된 synchronized (Node 단위)
  * - 빈 버킷은 CAS로 락 없이 삽입
  * - 충돌 시 해당 버킷만 synchronized

@@ -8,7 +8,7 @@ package com.example.concurrency.synchronization;
  * 2. happens-before: volatile 쓰기 이전의 모든 작업이 읽는 스레드에게 보임
  * 3. 원자성 미보장: volatile은 가시성만 해결, count++는 여전히 unsafe
  *
- * 면접 질문: "volatile과 synchronized의 차이점은?"
+ * 생각해볼 점: "volatile과 synchronized의 차이점은?"
  * -> volatile: 가시성만 보장, 원자성 X, Lock-free
  * -> synchronized: 가시성 + 원자성, Lock 기반
  */

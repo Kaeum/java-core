@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicStampedReference;
  * - ABA 문제 발생 가능
  * - 단일 변수만 원자적으로 처리 가능
  *
- * 면접 질문: "ABA 문제란?"
+ * 생각해볼 점: "ABA 문제란?"
  * - 값이 A -> B -> A로 변경되었을 때, CAS는 변경을 감지하지 못함
  * - 해결: AtomicStampedReference (버전/스탬프 사용)
  */

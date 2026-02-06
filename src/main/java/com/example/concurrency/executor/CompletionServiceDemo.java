@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * - 작업이 완료되면 자동으로 큐에 Future가 들어감
  * - take() / poll()로 완료된 순서대로 가져올 수 있음
  *
- * 면접 질문: "여러 비동기 작업 중 먼저 끝난 것부터 처리하려면?"
+ * 생각해볼 점: "여러 비동기 작업 중 먼저 끝난 것부터 처리하려면?"
  * - ExecutorCompletionService 사용
  * - 또는 CompletableFuture.anyOf() / CompletableFuture.allOf()
  */

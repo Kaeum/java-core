@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 2. Lock 카운터: 재진입할 때마다 카운터 증가, unlock 시 감소
  * 3. 가시성 보장: synchronized 블록 진입 시 메인 메모리에서 읽고, 나갈 때 메인 메모리에 쓰기
  *
- * 면접 질문: "synchronized가 재진입을 지원하지 않으면 어떤 문제가 발생하는가?"
+ * 생각해볼 점: "synchronized가 재진입을 지원하지 않으면 어떤 문제가 발생하는가?"
  * -> 부모 클래스의 synchronized 메서드를 자식이 오버라이드하고 super 호출 시 데드락 발생
  *
  * 참고: synchronized의 내부 lock count는 JVM 내부 구현이라 직접 접근 불가

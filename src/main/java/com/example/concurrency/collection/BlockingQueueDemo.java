@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
  * - PriorityBlockingQueue: 우선순위 힙 기반
  * - SynchronousQueue: 버퍼 없음, 직접 핸드오프
  *
- * 면접 질문: "put/take vs offer/poll 차이는?"
+ * 생각해볼 점: "put/take vs offer/poll 차이는?"
  * - put/take: 블로킹 (공간 없으면/비어있으면 대기)
  * - offer/poll: 논블로킹 (즉시 false/null 반환)
  * - offer(timeout)/poll(timeout): 지정 시간만 대기

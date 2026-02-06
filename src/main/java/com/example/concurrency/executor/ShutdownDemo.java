@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * - shutdownNow(): 실행 중인 작업에 interrupt, 대기 중인 작업 반환
  * - awaitTermination(): 지정 시간 동안 종료 대기
  *
- * 면접 질문: "ExecutorService를 안전하게 종료하는 방법은?"
+ * 생각해볼 점: "ExecutorService를 안전하게 종료하는 방법은?"
  * - shutdown() -> awaitTermination() -> shutdownNow() 패턴 권장
  */
 public class ShutdownDemo {
