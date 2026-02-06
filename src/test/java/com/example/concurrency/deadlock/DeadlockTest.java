@@ -1,4 +1,4 @@
-package com.example.concurrency.problem;
+package com.example.concurrency.deadlock;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
@@ -7,6 +7,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -213,6 +215,74 @@ class DeadlockTest {
 
         testDone.countDown();
         holder.join();
+    }
+
+    // === lockInterruptibly ===
+
+    @Test
+    @DisplayName("lockInterruptibly는 interrupt로 Deadlock을 해소할 수 있다")
+    void lockInterruptiblyBreaksDeadlock() throws Exception {
+        Lock lockA = new ReentrantLock();
+        Lock lockB = new ReentrantLock();
+
+        AtomicBoolean t1Interrupted = new AtomicBoolean(false);
+        AtomicBoolean t2Completed = new AtomicBoolean(false);
+
+        CountDownLatch bothLocked = new CountDownLatch(2);
+
+        Thread t1 = new Thread(() -> {
+            try {
+                lockA.lock();
+                try {
+                    bothLocked.countDown();
+                    awaitQuietly(bothLocked);
+                    lockB.lockInterruptibly();
+                    lockB.unlock();
+                } finally {
+                    lockA.unlock();
+                }
+            } catch (InterruptedException e) {
+                t1Interrupted.set(true);
+                lockA.unlock();
+            }
+        }, "li-t1");
+
+        Thread t2 = new Thread(() -> {
+            try {
+                lockB.lock();
+                try {
+                    bothLocked.countDown();
+                    awaitQuietly(bothLocked);
+                    lockA.lockInterruptibly();
+                    try {
+                        t2Completed.set(true);
+                    } finally {
+                        lockA.unlock();
+                    }
+                } finally {
+                    lockB.unlock();
+                }
+            } catch (InterruptedException e) {
+                // t2는 interrupt 안 할 것이므로 여기 오면 안 됨
+            }
+        }, "li-t2");
+
+        t1.start();
+        t2.start();
+
+        // Deadlock 진입 대기
+        Thread.sleep(500);
+
+        // t1을 interrupt -> t1이 lockB 대기에서 탈출 -> lockA 해제 -> t2 진행
+        t1.interrupt();
+
+        t1.join(2000);
+        t2.join(2000);
+
+        assertTrue(t1Interrupted.get(), "t1이 InterruptedException을 받아야 한다");
+        assertTrue(t2Completed.get(), "t2가 lockA를 획득하고 완료되어야 한다");
+        assertFalse(t1.isAlive(), "t1이 종료되어야 한다");
+        assertFalse(t2.isAlive(), "t2가 종료되어야 한다");
     }
 
     // === Deadlock 모니터 ===

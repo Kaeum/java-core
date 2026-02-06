@@ -1,4 +1,4 @@
-package com.example.concurrency.problem;
+package com.example.concurrency.deadlock;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -31,6 +31,7 @@ public class DeadlockPrevention {
 
         demonstrateLockOrdering();
         demonstrateTryLockTimeout();
+        demonstrateLockInterruptibly();
     }
 
     // ========================================
@@ -96,13 +97,13 @@ public class DeadlockPrevention {
             for (int i = 0; i < 1000; i++) {
                 transferWithOrdering(accountA, accountB, 1);
             }
-        }, "transfer-A->B");
+        }, "transfer-A-to-B");
 
         Thread t2 = new Thread(() -> {
             for (int i = 0; i < 1000; i++) {
                 transferWithOrdering(accountB, accountA, 1);
             }
-        }, "transfer-B->A");
+        }, "transfer-B-to-A");
 
         t1.start();
         t2.start();
@@ -192,6 +193,89 @@ public class DeadlockPrevention {
         System.out.println("  B 잔액: " + accountB.balance);
         System.out.println("  합계: " + (accountA.balance + accountB.balance) + " (원래: 2000)");
         System.out.println("  -> tryLock으로 Deadlock 없이 완료\n");
+    }
+
+    // ========================================
+    // 전략 3: lockInterruptibly
+    // ========================================
+
+    /**
+     * lockInterruptibly: Deadlock 상태에 빠진 스레드를 외부에서 interrupt로 깨울 수 있다.
+     *
+     * synchronized의 한계:
+     * - synchronized로 락 대기 중인 스레드는 interrupt해도 반응하지 않는다.
+     * - 즉, synchronized Deadlock은 외부에서 해소할 방법이 없다.
+     *
+     * lockInterruptibly의 동작:
+     * - 락 대기 중 interrupt가 걸리면 InterruptedException을 던지며 대기에서 빠져나온다.
+     * - 이를 통해 Deadlock 상황을 외부에서 감지 후 해소할 수 있다.
+     */
+    private static void demonstrateLockInterruptibly() throws InterruptedException {
+        System.out.println("[전략 3: lockInterruptibly]");
+
+        Lock lockA = new ReentrantLock();
+        Lock lockB = new ReentrantLock();
+
+        // t1: lockA 획득 -> lockB를 lockInterruptibly로 대기
+        Thread t1 = new Thread(() -> {
+            try {
+                lockA.lock();
+                System.out.println("  t1: lockA 획득");
+                sleep(100);
+
+                System.out.println("  t1: lockB를 lockInterruptibly로 대기...");
+                lockB.lockInterruptibly();
+                try {
+                    System.out.println("  t1: lockB 획득 (Deadlock 해소 후 도달)");
+                } finally {
+                    lockB.unlock();
+                }
+            } catch (InterruptedException e) {
+                System.out.println("  t1: InterruptedException 발생! 대기 탈출");
+            } finally {
+                lockA.unlock();
+                System.out.println("  t1: lockA 해제");
+            }
+        }, "interruptibly-t1");
+
+        // t2: lockB 획득 -> lockA를 lockInterruptibly로 대기
+        Thread t2 = new Thread(() -> {
+            try {
+                lockB.lock();
+                System.out.println("  t2: lockB 획득");
+                sleep(100);
+
+                System.out.println("  t2: lockA를 lockInterruptibly로 대기...");
+                lockA.lockInterruptibly();
+                try {
+                    System.out.println("  t2: lockA 획득 (Deadlock 해소 후 도달)");
+                } finally {
+                    lockA.unlock();
+                }
+            } catch (InterruptedException e) {
+                System.out.println("  t2: InterruptedException 발생! 대기 탈출");
+            } finally {
+                lockB.unlock();
+                System.out.println("  t2: lockB 해제");
+            }
+        }, "interruptibly-t2");
+
+        t1.start();
+        t2.start();
+
+        // Deadlock 진입 대기
+        sleep(500);
+
+        // t1을 interrupt -> t1이 lockB 대기에서 탈출 -> lockA 해제 -> t2가 lockA 획득 가능
+        System.out.println("  main: t1을 interrupt하여 Deadlock 해소");
+        t1.interrupt();
+
+        t1.join(2000);
+        t2.join(2000);
+
+        boolean resolved = !t1.isAlive() && !t2.isAlive();
+        System.out.println("  Deadlock 해소: " + resolved);
+        System.out.println("  -> synchronized였다면 interrupt가 무시되어 해소 불가\n");
     }
 
     // ========================================
